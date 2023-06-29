@@ -1,17 +1,26 @@
-const container = document.querySelector(".container");
+const detail = document.querySelector("input");
+const createButton = document.querySelector("button");
+const sketchPad = document.querySelector(".sketch-pad");
+const createSketchPad = (e) => {
+  // negative numbers
+  // decimal numbers
+  // numbers less than 16 and greater than 100
+  // text? periods?
+  sketchPad.innerHTML = "";
 
-const fillContainer = (numOfSquares) => {
-  for (let i = 1; i <= numOfSquares; i++) {
+  for (let i = 1; i <= detail.value; i++) {
     const column = document.createElement("div");
     column.classList.add("column");
-    for (let j = 1; j <= numOfSquares; j++) {
+    for (let j = 1; j <= detail.value; j++) {
       const square = document.createElement("div");
       square.classList.add("square");
+      square.addEventListener("click", draw);
+      square.addEventListener("mousemove", draw);
       column.appendChild(square);
     }
 
-    container.appendChild(column);
+    sketchPad.appendChild(column);
   }
 };
 
-fillContainer(16);
+createButton.addEventListener("click", createSketchPad);
