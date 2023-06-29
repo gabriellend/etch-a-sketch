@@ -1,6 +1,13 @@
 const detail = document.querySelector("input");
 const createButton = document.querySelector("button");
 const sketchPad = document.querySelector(".sketch-pad");
+
+const draw = (e) => {
+  if (e.buttons === 1 || e.type === "click") {
+    e.target.style.backgroundColor = "black";
+  }
+};
+
 const createSketchPad = (e) => {
   // negative numbers
   // decimal numbers
