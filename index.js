@@ -17,6 +17,7 @@ const showToolTip = (message) => {
 
 const clearInput = () => {
   detail.value = "";
+  detail.focus();
 
   if (tooltip.style.visibility === "visible") {
     tooltip.style.visibility = "hidden";
