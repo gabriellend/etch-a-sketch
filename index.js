@@ -43,26 +43,22 @@ checkEdgeCases = () => {
 
 const clearSketchPad = () => {
   sketchPad.innerHTML = "";
-  const clearButton = document.querySelector(".clear-button");
-  if (clearButton) {
-    chooseSizeArea.style.paddingLeft = "80px";
-    clearButton.remove();
+  createButton.addEventListener("click", createSketchPad);
+
+  if (createButton.innerText === "Clear") {
     clearInput();
   }
+
+  createButton.innerText = "Create";
 };
 
 const showClearButton = () => {
-  chooseSizeArea.style.paddingLeft = 0;
-
-  const clearButton = document.createElement("button");
-  clearButton.innerText = "Clear";
-  clearButton.classList.add("clear-button");
-  clearButton.addEventListener("click", clearSketchPad);
-
-  chooseSizeArea.appendChild(clearButton);
+  createButton.innerText = "Clear";
+  createButton.removeEventListener("click", createSketchPad);
+  createButton.addEventListener("click", clearSketchPad);
 };
 
-const createSketchPad = (e) => {
+const createSketchPad = () => {
   const passed = checkEdgeCases();
   if (!passed) {
     return;
