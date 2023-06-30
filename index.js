@@ -22,6 +22,25 @@ const clearInput = () => {
     tooltip.style.visibility = "hidden";
   }
 };
+
+checkEdgeCases = () => {
+  let message;
+  if (detail.value === "" || isNaN(Number(detail.value))) {
+    message = "Please enter a number";
+  } else if (detail.value % 1 !== 0) {
+    message = "Please enter a whole number";
+  } else if (detail.value < 16 || detail.value > 100) {
+    message = "Please enter a number between 16 and 100";
+  }
+
+  if (message) {
+    showToolTip(message);
+    return false;
+  } else {
+    return true;
+  }
+};
+
 const clearSketchPad = () => {
   sketchPad.innerHTML = "";
   const clearButton = document.querySelector(".clear-button");
@@ -44,16 +63,13 @@ const showClearButton = () => {
 };
 
 const createSketchPad = (e) => {
-  if (
-    isNaN(Number(detail.value)) ||
-    detail.value % 1 !== 0 ||
-    detail.value < 16 ||
-    detail.value > 100
-  ) {
+  const passed = checkEdgeCases();
+  if (!passed) {
     return;
   }
 
-  sketchPad.innerHTML = "";
+  clearSketchPad();
+  showClearButton();
 
   for (let i = 1; i <= detail.value; i++) {
     const column = document.createElement("div");
