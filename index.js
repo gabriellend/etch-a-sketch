@@ -9,10 +9,15 @@ const draw = (e) => {
 };
 
 const createSketchPad = (e) => {
-  // negative numbers
-  // decimal numbers
-  // numbers less than 16 and greater than 100
-  // text? periods?
+  if (
+    isNaN(Number(detail.value)) ||
+    detail.value % 1 !== 0 ||
+    detail.value < 16 ||
+    detail.value > 100
+  ) {
+    return;
+  }
+
   sketchPad.innerHTML = "";
 
   for (let i = 1; i <= detail.value; i++) {
