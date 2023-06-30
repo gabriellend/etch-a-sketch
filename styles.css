@@ -32,8 +32,31 @@ h2 {
   display: flex;
   width: 100%;
   gap: 10px;
+.tooltip {
+  position: relative;
+  display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  align-items: center;
+  visibility: hidden;
+  width: 155px;
+  height: 1.25rem;
+  background-color: lightseagreen;
+  color: #fff;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 6px;
+  transition: opacity 0.6s;
+  padding: 15px;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 35%;
+  right: -10%;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent lightseagreen;
 }
 
 input {

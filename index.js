@@ -1,3 +1,4 @@
+const tooltip = document.querySelector(".tooltip");
 const detail = document.querySelector("input");
 const createButton = document.querySelector("button");
 const sketchPad = document.querySelector(".sketch-pad");
@@ -8,6 +9,10 @@ const draw = (e) => {
   }
 };
 
+const showToolTip = (message) => {
+  tooltip.innerText = message;
+  tooltip.style.visibility = "visible";
+};
 const createSketchPad = (e) => {
   if (
     isNaN(Number(detail.value)) ||
