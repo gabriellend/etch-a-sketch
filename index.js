@@ -11,17 +11,22 @@ const draw = (e) => {
 };
 
 const showToolTip = (message) => {
+  detail.focus();
   tooltip.innerText = message;
   tooltip.style.visibility = "visible";
+};
+
+const clearTooltip = () => {
+  if (tooltip.style.visibility === "visible") {
+    tooltip.style.visibility = "hidden";
+  }
 };
 
 const clearInput = () => {
   detail.value = "";
   detail.focus();
 
-  if (tooltip.style.visibility === "visible") {
-    tooltip.style.visibility = "hidden";
-  }
+  clearTooltip();
 };
 
 checkEdgeCases = () => {
@@ -67,6 +72,7 @@ const createSketchPad = () => {
 
   clearSketchPad();
   showClearButton();
+  clearTooltip();
 
   for (let i = 1; i <= detail.value; i++) {
     const column = document.createElement("div");
