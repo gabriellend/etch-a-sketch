@@ -1,6 +1,7 @@
+const chooseSizeArea = document.querySelector(".choose-size");
 const tooltip = document.querySelector(".tooltip");
 const detail = document.querySelector("input");
-const createButton = document.querySelector("button");
+const createButton = document.querySelector(".create-button");
 const sketchPad = document.querySelector(".sketch-pad");
 
 const draw = (e) => {
@@ -13,6 +14,35 @@ const showToolTip = (message) => {
   tooltip.innerText = message;
   tooltip.style.visibility = "visible";
 };
+
+const clearInput = () => {
+  detail.value = "";
+
+  if (tooltip.style.visibility === "visible") {
+    tooltip.style.visibility = "hidden";
+  }
+};
+const clearSketchPad = () => {
+  sketchPad.innerHTML = "";
+  const clearButton = document.querySelector(".clear-button");
+  if (clearButton) {
+    chooseSizeArea.style.paddingLeft = "80px";
+    clearButton.remove();
+    clearInput();
+  }
+};
+
+const showClearButton = () => {
+  chooseSizeArea.style.paddingLeft = 0;
+
+  const clearButton = document.createElement("button");
+  clearButton.innerText = "Clear";
+  clearButton.classList.add("clear-button");
+  clearButton.addEventListener("click", clearSketchPad);
+
+  chooseSizeArea.appendChild(clearButton);
+};
+
 const createSketchPad = (e) => {
   if (
     isNaN(Number(detail.value)) ||
@@ -41,3 +71,4 @@ const createSketchPad = (e) => {
 };
 
 createButton.addEventListener("click", createSketchPad);
+detail.addEventListener("focus", clearInput);
