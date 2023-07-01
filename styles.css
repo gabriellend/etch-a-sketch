@@ -134,6 +134,11 @@ button:active {
   transform: scale(1.1);
 }
 
+.black {
+  background-color: black;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px 0px;
+}
+
 .red {
   background-color: red;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 8px 0px;

@@ -1,12 +1,24 @@
-const chooseSizeArea = document.querySelector(".choose-size");
+// ELEMENTS
 const tooltip = document.querySelector(".tooltip");
 const gridSizeInput = document.querySelector("input");
 const button = document.querySelector(".create-button");
 const sketchPad = document.querySelector(".sketch-pad");
+const colors = document.querySelectorAll(".color");
+
+// VARIABLES
+let currentColor = "";
+
+// FUNCTIONS
+const chooseColor = (e) => {
+  const computedStyle = window.getComputedStyle(e.target);
+  const backgroundColor = computedStyle.backgroundColor;
+
+  currentColor = backgroundColor;
+};
 
 const draw = (e) => {
   if (e.buttons === 1 || e.type === "click") {
-    e.target.style.backgroundColor = "black";
+    e.target.style.backgroundColor = currentColor;
   }
 };
 
@@ -88,5 +100,9 @@ const createSketchPad = () => {
   }
 };
 
+// EVENT LISTENERS
 button.addEventListener("click", createSketchPad);
 gridSizeInput.addEventListener("focus", clearInput);
+colors.forEach((color) => {
+  color.addEventListener("click", chooseColor);
+});
