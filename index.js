@@ -1,10 +1,3 @@
-// TODO
-// figure out how to start with actual color (mousedown and click are both firing I think)
-// make default grid size to begin with
-// add color picker
-// add eraser
-// add undo button
-
 // ELEMENTS
 const tooltip = document.querySelector(".tooltip");
 const gridSizeInput = document.querySelector("input");
@@ -16,6 +9,10 @@ const colors = document.querySelectorAll(".color");
 let currentColor = "";
 
 // FUNCTIONS
+const setCurrentColor = (color) => {
+  currentColor = color;
+};
+
 const darken = (color) => {
   // color comes in as an rgb string. This isolates just the values.
   const rgbValues = color.slice(4, color.length - 1).split(", ");
@@ -32,26 +29,21 @@ const darken = (color) => {
   }
 
   const darkenedColor = `rgb(${darkenedColorRGBValues[0]}, ${darkenedColorRGBValues[1]}, ${darkenedColorRGBValues[2]})`;
-  currentColor = darkenedColor;
-
   return darkenedColor;
 };
 
 const chooseColor = (e) => {
   const computedStyle = window.getComputedStyle(e.target);
   const backgroundColor = computedStyle.backgroundColor;
-  currentColor = backgroundColor;
+  setCurrentColor(backgroundColor);
 };
 
 const draw = (e) => {
-  if (
-    (e.buttons !== 1 && e.type === "click") ||
-    (e.buttons === 1 && e.type === "mousedown")
-  ) {
-    const newColor = darken(currentColor);
-    e.target.style.backgroundColor = newColor;
-  } else if (e.buttons === 1 || e.type === "click") {
+  if ((e.type === "mousemove" && e.buttons === 1) || e.type === "mousedown") {
     e.target.style.backgroundColor = currentColor;
+  } else if (e.type === "mouseup") {
+    let darkenedColor = darken(currentColor);
+    setCurrentColor(darkenedColor);
   }
 };
 
@@ -122,7 +114,7 @@ const createSketchPad = () => {
     for (let j = 1; j <= gridSizeInput.value; j++) {
       const square = document.createElement("div");
       square.classList.add("square");
-      square.addEventListener("click", draw);
+      square.addEventListener("mouseup", draw);
       square.addEventListener("mousemove", draw);
       square.addEventListener("mousedown", draw);
 
