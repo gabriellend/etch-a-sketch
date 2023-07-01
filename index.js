@@ -1,7 +1,7 @@
 const chooseSizeArea = document.querySelector(".choose-size");
 const tooltip = document.querySelector(".tooltip");
-const detail = document.querySelector("input");
-const createButton = document.querySelector(".create-button");
+const gridSizeInput = document.querySelector("input");
+const button = document.querySelector(".create-button");
 const sketchPad = document.querySelector(".sketch-pad");
 
 const draw = (e) => {
@@ -11,7 +11,7 @@ const draw = (e) => {
 };
 
 const showToolTip = (message) => {
-  detail.focus();
+  gridSizeInput.focus();
   tooltip.innerText = message;
   tooltip.style.visibility = "visible";
 };
@@ -23,19 +23,19 @@ const clearTooltip = () => {
 };
 
 const clearInput = () => {
-  detail.value = "";
-  detail.focus();
+  gridSizeInput.value = "";
+  gridSizeInput.focus();
 
   clearTooltip();
 };
 
 checkEdgeCases = () => {
   let message;
-  if (detail.value === "" || isNaN(Number(detail.value))) {
+  if (gridSizeInput.value === "" || isNaN(Number(gridSizeInput.value))) {
     message = "Please enter a number";
-  } else if (detail.value % 1 !== 0) {
+  } else if (gridSizeInput.value % 1 !== 0) {
     message = "Please enter a whole number";
-  } else if (detail.value < 16 || detail.value > 100) {
+  } else if (gridSizeInput.value < 16 || gridSizeInput.value > 100) {
     message = "Please enter a number between 16 and 100";
   }
 
@@ -49,19 +49,18 @@ checkEdgeCases = () => {
 
 const clearSketchPad = () => {
   sketchPad.innerHTML = "";
-  createButton.addEventListener("click", createSketchPad);
 
-  if (createButton.innerText === "Clear") {
-    clearInput();
-  }
+  clearInput();
 
-  createButton.innerText = "Create";
+  button.innerText = "Create";
+  button.removeEventListener("click", clearSketchPad);
+  button.addEventListener("click", createSketchPad);
 };
 
 const showClearButton = () => {
-  createButton.innerText = "Clear";
-  createButton.removeEventListener("click", createSketchPad);
-  createButton.addEventListener("click", clearSketchPad);
+  button.innerText = "Clear";
+  button.removeEventListener("click", createSketchPad);
+  button.addEventListener("click", clearSketchPad);
 };
 
 const createSketchPad = () => {
@@ -70,18 +69,18 @@ const createSketchPad = () => {
     return;
   }
 
-  clearSketchPad();
   showClearButton();
   clearTooltip();
 
-  for (let i = 1; i <= detail.value; i++) {
+  for (let i = 1; i <= gridSizeInput.value; i++) {
     const column = document.createElement("div");
     column.classList.add("column");
-    for (let j = 1; j <= detail.value; j++) {
+    for (let j = 1; j <= gridSizeInput.value; j++) {
       const square = document.createElement("div");
       square.classList.add("square");
       square.addEventListener("click", draw);
       square.addEventListener("mousemove", draw);
+
       column.appendChild(square);
     }
 
@@ -89,5 +88,5 @@ const createSketchPad = () => {
   }
 };
 
-createButton.addEventListener("click", createSketchPad);
-detail.addEventListener("focus", clearInput);
+button.addEventListener("click", createSketchPad);
+gridSizeInput.addEventListener("focus", clearInput);
