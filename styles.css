@@ -30,8 +30,14 @@ h1 {
   margin: 0;
 }
 
+.instructions {
+  display: flex;
+  flex-direction: column;
+}
+
 h2 {
   margin: 0;
+  font-weight: 100;
 }
 
 .create-sketchpad-div {
