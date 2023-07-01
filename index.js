@@ -1,3 +1,10 @@
+// TODO
+// figure out how to start with actual color (mousedown and click are both firing I think)
+// make default grid size to begin with
+// add color picker
+// add eraser
+// add undo button
+
 // ELEMENTS
 const tooltip = document.querySelector(".tooltip");
 const gridSizeInput = document.querySelector("input");
