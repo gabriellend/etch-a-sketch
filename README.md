@@ -1,6 +1,6 @@
 # etch-a-sketch
 
-Done for my students as part of the Odin Project
+Done for my DevIsland students as part of the Odin Project
 
 Change line thickness by changing the grid size.
 Option for four colors: black, red, yellow, blue.
