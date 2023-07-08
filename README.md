@@ -1,6 +1,6 @@
 # etch-a-sketch
 
-Done for my DevIsland students as part of the Odin Project
+Done for my DevIsland students as part of the Odin Project, with a few extras that depart from a standard etch-a-sketch.
 
 Change line thickness by changing the grid size.
 Option for four colors: black, red, yellow, blue.
